@@ -1,10 +1,8 @@
 package com.wanted.wanted.jobposting.mapper;
 
-import com.wanted.wanted.company.entity.Company;
 import com.wanted.wanted.company.service.CompanyService;
 import com.wanted.wanted.jobposting.dto.JobPostingDto;
 import com.wanted.wanted.jobposting.entity.JobPosting;
-import com.wanted.wanted.jobposting.repository.JobPostingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

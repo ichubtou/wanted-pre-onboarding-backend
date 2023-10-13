@@ -1,7 +1,6 @@
 package com.wanted.wanted.jobposting.controller;
 
 import com.wanted.wanted.jobposting.dto.JobPostingDto;
-import com.wanted.wanted.jobposting.entity.JobPosting;
 import com.wanted.wanted.jobposting.service.JobPostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

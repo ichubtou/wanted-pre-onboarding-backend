@@ -3,23 +3,15 @@ package com.wanted.wanted.jobposting.service;
 import com.wanted.wanted.company.entity.Company;
 import com.wanted.wanted.jobposting.dto.JobPostingDto;
 import com.wanted.wanted.jobposting.entity.JobPosting;
-import com.wanted.wanted.jobposting.mapper.JobPostingMapper;
 import com.wanted.wanted.jobposting.repository.JobPostingRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class JobPostingServiceTest {
@@ -29,11 +21,6 @@ public class JobPostingServiceTest {
 
     @MockBean
     private JobPostingRepository jobPostingRepository;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     @DisplayName("JobPosting 생성")
