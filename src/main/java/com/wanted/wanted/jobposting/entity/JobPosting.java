@@ -15,7 +15,7 @@ public class JobPosting {
 
     private String Position;
 
-    private String reward;
+    private Integer reward;
 
     private String skill;
 
