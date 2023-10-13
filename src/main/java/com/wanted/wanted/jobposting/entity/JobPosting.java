@@ -1,15 +1,14 @@
 package com.wanted.wanted.jobposting.entity;
 
 import com.wanted.wanted.company.entity.Company;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Getter
-@Builder
+@Setter
 public class JobPosting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +28,11 @@ public class JobPosting {
 
     @OneToMany(mappedBy = "jobPosting")
     private List<ApplyForJob> applicantList;
+
+//    public void setCompany(Company company) {
+//        this.company = company;
+//        if(!company.getJobPostingList().contains(this)) {
+//            company.getJobPostingList().add(this);
+//        }
+//    }
 }
