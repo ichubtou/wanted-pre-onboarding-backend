@@ -1,8 +1,12 @@
 package com.wanted.wanted.jobposting.service;
 
+import com.wanted.wanted.applicant.entity.Applicant;
+import com.wanted.wanted.applicant.repository.ApplicantRepository;
 import com.wanted.wanted.jobposting.dto.JobPostingDto;
+import com.wanted.wanted.jobposting.entity.ApplyForJob;
 import com.wanted.wanted.jobposting.entity.JobPosting;
 import com.wanted.wanted.jobposting.mapper.JobPostingMapper;
+import com.wanted.wanted.jobposting.repository.ApplyForJobRepository;
 import com.wanted.wanted.jobposting.repository.JobPostingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,8 @@ import java.util.Optional;
 @Transactional
 public class JobPostingService {
     private final JobPostingRepository jobPostingRepository;
+    private final ApplicantRepository applicantRepository;
+    private final ApplyForJobRepository applyForJobRepository;
     private final JobPostingMapper jobPostingMapper;
 
     public JobPostingDto.PostAndUpdateResponse createJobPosting(JobPostingDto.Post jobPostingDto) {
@@ -40,8 +46,8 @@ public class JobPostingService {
         return jobPostingUpdateResponse;
     }
 
-    public void deleteJobPosting(Long position_id) {
-        jobPostingRepository.deleteById(position_id);
+    public void deleteJobPosting(Long posting_id) {
+        jobPostingRepository.deleteById(posting_id);
     }
 
     public List<JobPostingDto.GetResponse> getJobPostings() {
@@ -58,5 +64,26 @@ public class JobPostingService {
 
     public JobPostingDto.DetailResponse getDetailJobPosting(Long position_id) {
         return jobPostingMapper.jobPostingToDetailJobPostingResponse(jobPostingRepository.findById(position_id).get());
+    }
+
+    public JobPostingDto.applyResponse applyForJob(Long posting_id, Long applicant_id) {
+        JobPosting jobPosting = jobPostingRepository.findById(posting_id).get();
+        Applicant applicant = applicantRepository.findById(applicant_id).get();
+
+        List<ApplyForJob> applyForJobList = jobPosting.getApplyForJobList();
+        for (ApplyForJob applyForJob : applyForJobList) {
+            if (applyForJob.getApplicant().equals(applicant)) {
+                throw new RuntimeException();
+            }
+        }
+
+        ApplyForJob applyForJob = new ApplyForJob();
+
+        applyForJob.setJobPosting(jobPosting);
+        applyForJob.setApplicant(applicant);
+
+        ApplyForJob savedApplyForJob = applyForJobRepository.save(applyForJob);
+
+        return jobPostingMapper.applyForJobToApplyResponse(savedApplyForJob);
     }
 }

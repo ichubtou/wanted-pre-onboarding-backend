@@ -76,4 +76,13 @@ public class JobPostingDto {
         private String description;
         private List<Long> otherJobPostingList;
     }
+
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class applyResponse {
+        private Long posting_id;
+        private Long applicant_id;
+    }
 }

@@ -21,14 +21,14 @@ public class JobPostingController {
         return new ResponseEntity<>(jobPostingService.createJobPosting(jobPostingPostDto), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{position_id}")
+    @PatchMapping("/{posting_id}")
     public ResponseEntity<JobPostingDto.PostAndUpdateResponse> updateJobPosting(@PathVariable Long position_id, @RequestBody JobPostingDto.Update jobPostingUpdateDto) {
         return new ResponseEntity<>(jobPostingService.updateJobPosting(position_id, jobPostingUpdateDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{position_id}")
-    public ResponseEntity<Void> deleteJobPosting(@PathVariable Long position_id) {
-        jobPostingService.deleteJobPosting(position_id);
+    @DeleteMapping("/{posting_id}")
+    public ResponseEntity<Void> deleteJobPosting(@PathVariable Long posting_id) {
+        jobPostingService.deleteJobPosting(posting_id);
         return ResponseEntity.noContent().build();
     }
 
@@ -42,8 +42,13 @@ public class JobPostingController {
         return new ResponseEntity<>(jobPostingService.getSearchJobPostings(search), HttpStatus.OK);
     }
 
-    @GetMapping("/{position_id}")
-    public ResponseEntity<JobPostingDto.DetailResponse> getDetailJobPosting(@PathVariable Long position_id) {
-        return new ResponseEntity<>(jobPostingService.getDetailJobPosting(position_id), HttpStatus.OK);
+    @GetMapping("/{posting_id}")
+    public ResponseEntity<JobPostingDto.DetailResponse> getDetailJobPosting(@PathVariable Long posting_id) {
+        return new ResponseEntity<>(jobPostingService.getDetailJobPosting(posting_id), HttpStatus.OK);
+    }
+
+    @PostMapping("/{posting_id}/{applicant_id}")
+    public ResponseEntity<JobPostingDto.applyResponse> applyForJob(@PathVariable Long posting_id, @PathVariable Long applicant_id) {
+        return new ResponseEntity<>(jobPostingService.applyForJob(posting_id, applicant_id), HttpStatus.OK);
     }
 }

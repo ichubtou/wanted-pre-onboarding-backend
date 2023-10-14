@@ -27,7 +27,7 @@ public class JobPosting {
     private Company company;
 
     @OneToMany(mappedBy = "jobPosting")
-    private List<ApplyForJob> applicantList;
+    private List<ApplyForJob> applyForJobList;
 
 //    public void setCompany(Company company) {
 //        this.company = company;

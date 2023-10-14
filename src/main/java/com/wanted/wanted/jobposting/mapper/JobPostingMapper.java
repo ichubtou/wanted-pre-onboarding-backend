@@ -2,6 +2,7 @@ package com.wanted.wanted.jobposting.mapper;
 
 import com.wanted.wanted.company.service.CompanyService;
 import com.wanted.wanted.jobposting.dto.JobPostingDto;
+import com.wanted.wanted.jobposting.entity.ApplyForJob;
 import com.wanted.wanted.jobposting.entity.JobPosting;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -77,5 +78,13 @@ public class JobPostingMapper {
         detailResponse.setOtherJobPostingList(otherJobPostingList);
 
         return detailResponse;
+    }
+
+    public JobPostingDto.applyResponse applyForJobToApplyResponse(ApplyForJob applyForJob) {
+        JobPostingDto.applyResponse applyResponse = new JobPostingDto.applyResponse();
+        applyResponse.setPosting_id(applyForJob.getJobPosting().getPosting_id());
+        applyResponse.setApplicant_id(applyForJob.getApplicant().getApplicant_id());
+
+        return applyResponse;
     }
 }

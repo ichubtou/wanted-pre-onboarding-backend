@@ -14,5 +14,5 @@ public class Applicant {
     private Long applicant_id;
 
     @OneToMany(mappedBy = "applicant")
-    private List<ApplyForJob> applicantList;
+    private List<ApplyForJob> applyForJobList;
 }
