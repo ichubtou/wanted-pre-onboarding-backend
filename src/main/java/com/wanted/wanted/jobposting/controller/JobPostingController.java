@@ -22,8 +22,8 @@ public class JobPostingController {
     }
 
     @PatchMapping("/{posting_id}")
-    public ResponseEntity<JobPostingDto.PostAndUpdateResponse> updateJobPosting(@PathVariable Long position_id, @RequestBody JobPostingDto.Update jobPostingUpdateDto) {
-        return new ResponseEntity<>(jobPostingService.updateJobPosting(position_id, jobPostingUpdateDto), HttpStatus.OK);
+    public ResponseEntity<JobPostingDto.PostAndUpdateResponse> updateJobPosting(@PathVariable Long posting_id, @RequestBody JobPostingDto.Update jobPostingUpdateDto) {
+        return new ResponseEntity<>(jobPostingService.updateJobPosting(posting_id, jobPostingUpdateDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{posting_id}")
