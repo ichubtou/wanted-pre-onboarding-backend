@@ -56,4 +56,26 @@ public class JobPostingMapper {
 
         return getResponseList;
     }
+
+    public JobPostingDto.DetailResponse jobPostingToDetailJobPostingResponse(JobPosting jobPosting) {
+        JobPostingDto.DetailResponse detailResponse = new JobPostingDto.DetailResponse();
+        detailResponse.setPosting_id(jobPosting.getPosting_id());
+        detailResponse.setCompany_name(jobPosting.getCompany().getCompany_name());
+        detailResponse.setCountry(jobPosting.getCompany().getCountry());
+        detailResponse.setLocation(jobPosting.getCompany().getLocation());
+        detailResponse.setPosition(jobPosting.getPosition());
+        detailResponse.setReward(jobPosting.getReward());
+        detailResponse.setSkill(jobPosting.getSkill());
+        detailResponse.setDescription(jobPosting.getDescription());
+
+        List<JobPosting> jobPostingList = jobPosting.getCompany().getJobPostingList();
+        List<Long> otherJobPostingList = new ArrayList<>();
+        for (JobPosting posting : jobPostingList) {
+            otherJobPostingList.add(posting.getPosting_id());
+        }
+
+        detailResponse.setOtherJobPostingList(otherJobPostingList);
+
+        return detailResponse;
+    }
 }

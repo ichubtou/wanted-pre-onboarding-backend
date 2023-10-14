@@ -1,6 +1,11 @@
 package com.wanted.wanted.jobposting.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
 
 public class JobPostingDto {
     @Setter
@@ -54,5 +59,21 @@ public class JobPostingDto {
         private String position;
         private Integer reward;
         private String skill;
+    }
+
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class DetailResponse {
+        private Long posting_id;
+        private String company_name;
+        private String country;
+        private String location;
+        private String position;
+        private Integer reward;
+        private String skill;
+        private String description;
+        private List<Long> otherJobPostingList;
     }
 }

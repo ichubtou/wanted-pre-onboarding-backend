@@ -29,8 +29,7 @@ public class JobPostingService {
     }
 
     public JobPostingDto.PostAndUpdateResponse updateJobPosting(Long position_id, JobPostingDto.Update jobPostingDto) {
-        Optional<JobPosting> findJobPosting = jobPostingRepository.findById(position_id);
-        JobPosting jobPosting = findJobPosting.get();
+        JobPosting jobPosting = jobPostingRepository.findById(position_id).get();
         Optional.ofNullable(jobPostingDto.getPosition()).ifPresent(jobPosting::setPosition);
         Optional.ofNullable(jobPostingDto.getReward()).ifPresent(jobPosting::setReward);
         Optional.ofNullable(jobPostingDto.getDescription()).ifPresent(jobPosting::setDescription);
@@ -55,5 +54,9 @@ public class JobPostingService {
 
     public List<JobPostingDto.GetResponse> getSearchJobPostings(String search) {
         return jobPostingMapper.jobPostingGetListToJobPostingList(jobPostingRepository.searchJobPostings(search));
+    }
+
+    public JobPostingDto.DetailResponse getDetailJobPosting(Long position_id) {
+        return jobPostingMapper.jobPostingToDetailJobPostingResponse(jobPostingRepository.findById(position_id).get());
     }
 }

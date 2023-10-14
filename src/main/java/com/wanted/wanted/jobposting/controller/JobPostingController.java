@@ -41,4 +41,9 @@ public class JobPostingController {
     public ResponseEntity<List<JobPostingDto.GetResponse>> getSearchJobPostings(@RequestParam String search) {
         return new ResponseEntity<>(jobPostingService.getSearchJobPostings(search), HttpStatus.OK);
     }
+
+    @GetMapping("/{position_id}")
+    public ResponseEntity<JobPostingDto.DetailResponse> getDetailJobPosting(@PathVariable Long position_id) {
+        return new ResponseEntity<>(jobPostingService.getDetailJobPosting(position_id), HttpStatus.OK);
+    }
 }
