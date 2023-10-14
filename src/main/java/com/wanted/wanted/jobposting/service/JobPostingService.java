@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -15,13 +17,26 @@ public class JobPostingService {
     private final JobPostingRepository jobPostingRepository;
     private final JobPostingMapper jobPostingMapper;
 
-    public JobPostingDto.PostResponse createJobPosting(JobPostingDto.Post jobPostingDto) {
+    public JobPostingDto.PostAndUpdateResponse createJobPosting(JobPostingDto.Post jobPostingDto) {
         JobPosting jobPosting = jobPostingMapper.jobPostingPostToJobPosting(jobPostingDto);
 
         JobPosting savedJobPosting = jobPostingRepository.save(jobPosting);
 
-        JobPostingDto.PostResponse jobPostingPostResponse = jobPostingMapper.jobPostingToJobPostingPostResponse(savedJobPosting);
+        JobPostingDto.PostAndUpdateResponse jobPostingPostResponse = jobPostingMapper.jobPostingToJobPostingPostResponse(savedJobPosting);
 
         return jobPostingPostResponse;
+    }
+
+    public JobPostingDto.PostAndUpdateResponse updateJobPosting(Long position_id, JobPostingDto.Update jobPostingDto) {
+        Optional<JobPosting> findJobPosting = jobPostingRepository.findById(position_id);
+        JobPosting jobPosting = findJobPosting.get();
+        Optional.ofNullable(jobPostingDto.getPosition()).ifPresent(jobPosting::setPosition);
+        Optional.ofNullable(jobPostingDto.getReward()).ifPresent(jobPosting::setReward);
+        Optional.ofNullable(jobPostingDto.getDescription()).ifPresent(jobPosting::setDescription);
+        Optional.ofNullable(jobPostingDto.getSkill()).ifPresent(jobPosting::setSkill);
+
+        JobPostingDto.PostAndUpdateResponse jobPostingUpdateResponse = jobPostingMapper.jobPostingToJobPostingPostResponse(jobPosting);
+
+        return jobPostingUpdateResponse;
     }
 }

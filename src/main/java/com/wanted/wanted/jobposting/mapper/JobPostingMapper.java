@@ -22,8 +22,8 @@ public class JobPostingMapper {
         return jobPosting;
     }
 
-    public JobPostingDto.PostResponse jobPostingToJobPostingPostResponse(JobPosting jobPosting) {
-        JobPostingDto.PostResponse postResponse = new JobPostingDto.PostResponse();
+    public JobPostingDto.PostAndUpdateResponse jobPostingToJobPostingPostResponse(JobPosting jobPosting) {
+        JobPostingDto.PostAndUpdateResponse postResponse = new JobPostingDto.PostAndUpdateResponse();
         postResponse.setPosting_id(jobPosting.getPosting_id());
         postResponse.setCompany_id(jobPosting.getCompany().getCompany_id());
         postResponse.setCompany_name(jobPosting.getCompany().getCompany_name());
