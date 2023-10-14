@@ -128,8 +128,8 @@ public class JobPostingServiceTest {
         assertThat(result.getCountry()).isEqualTo(country);
         assertThat(result.getLocation()).isEqualTo(location);
         assertThat(result.getPosition()).isEqualTo(position);
-        assertThat(result.getReward()).isEqualTo(reward);
+        assertThat(result.getReward()).isEqualTo(updateReward);
         assertThat(result.getDescription()).isEqualTo(description);
-        assertThat(result.getSkill()).isEqualTo(skill);
+        assertThat(result.getSkill()).isEqualTo(updateSkill);
     }
 }
