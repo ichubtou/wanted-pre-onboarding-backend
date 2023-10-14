@@ -66,14 +66,16 @@ public class JobPostingService {
         return jobPostingMapper.jobPostingToDetailJobPostingResponse(jobPostingRepository.findById(position_id).get());
     }
 
-    public JobPostingDto.applyResponse applyForJob(Long posting_id, Long applicant_id) {
+    public JobPostingDto.ApplyResponse applyForJob(Long posting_id, Long applicant_id) {
         JobPosting jobPosting = jobPostingRepository.findById(posting_id).get();
         Applicant applicant = applicantRepository.findById(applicant_id).get();
 
         List<ApplyForJob> applyForJobList = jobPosting.getApplyForJobList();
-        for (ApplyForJob applyForJob : applyForJobList) {
-            if (applyForJob.getApplicant().equals(applicant)) {
-                throw new RuntimeException();
+        if (applyForJobList != null) {
+            for (ApplyForJob applyForJob : applyForJobList) {
+                if (applyForJob.getApplicant().equals(applicant)) {
+                    throw new RuntimeException();
+                }
             }
         }
 

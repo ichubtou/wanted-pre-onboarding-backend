@@ -1,8 +1,12 @@
 package com.wanted.wanted.jobposting.service;
 
+import com.wanted.wanted.applicant.entity.Applicant;
+import com.wanted.wanted.applicant.repository.ApplicantRepository;
 import com.wanted.wanted.company.entity.Company;
 import com.wanted.wanted.jobposting.dto.JobPostingDto;
+import com.wanted.wanted.jobposting.entity.ApplyForJob;
 import com.wanted.wanted.jobposting.entity.JobPosting;
+import com.wanted.wanted.jobposting.repository.ApplyForJobRepository;
 import com.wanted.wanted.jobposting.repository.JobPostingRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,6 +30,12 @@ public class JobPostingServiceTest {
 
     @MockBean
     private JobPostingRepository jobPostingRepository;
+
+    @MockBean
+    private ApplicantRepository applicantRepository;
+
+    @MockBean
+    private ApplyForJobRepository applyForJobRepository;
 
     @Test
     @DisplayName("JobPosting 생성")
@@ -285,5 +295,34 @@ public class JobPostingServiceTest {
         assertThat(detailJobPosting.getSkill()).isEqualTo(skill);
         assertThat(detailJobPosting.getDescription()).isEqualTo(description);
         assertThat(detailJobPosting.getOtherJobPostingList()).isEqualTo(List.of(2L));
+    }
+
+    @Test
+    @DisplayName("JobPosting 상세 조회")
+    public void testApplyForJob() {
+        // given
+        Long posting_id = 1L;
+        Long applicant_id = 1L;
+
+        JobPosting jobPosting = new JobPosting();
+        jobPosting.setPosting_id(posting_id);
+
+        Applicant applicant = new Applicant();
+        applicant.setApplicant_id(applicant_id);
+
+        ApplyForJob applyForJob = new ApplyForJob();
+        applyForJob.setJobPosting(jobPosting);
+        applyForJob.setApplicant(applicant);
+
+        Mockito.when(jobPostingRepository.findById(anyLong())).thenReturn(Optional.of(jobPosting));
+        Mockito.when(applicantRepository.findById(anyLong())).thenReturn(Optional.of(applicant));
+        Mockito.when(applyForJobRepository.save(Mockito.any(ApplyForJob.class))).thenReturn(applyForJob);
+
+        // when
+        JobPostingDto.ApplyResponse applyResponse = jobPostingService.applyForJob(posting_id, applicant_id);
+
+        // then
+        assertThat(applyResponse.getPosting_id()).isEqualTo(posting_id);
+        assertThat(applyResponse.getApplicant_id()).isEqualTo(applicant_id);
     }
 }

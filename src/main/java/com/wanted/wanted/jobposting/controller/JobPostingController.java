@@ -48,7 +48,7 @@ public class JobPostingController {
     }
 
     @PostMapping("/{posting_id}/{applicant_id}")
-    public ResponseEntity<JobPostingDto.applyResponse> applyForJob(@PathVariable Long posting_id, @PathVariable Long applicant_id) {
+    public ResponseEntity<JobPostingDto.ApplyResponse> applyForJob(@PathVariable Long posting_id, @PathVariable Long applicant_id) {
         return new ResponseEntity<>(jobPostingService.applyForJob(posting_id, applicant_id), HttpStatus.OK);
     }
 }

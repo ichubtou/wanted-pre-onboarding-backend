@@ -81,7 +81,7 @@ public class JobPostingDto {
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class applyResponse {
+    public static class ApplyResponse {
         private Long posting_id;
         private Long applicant_id;
     }

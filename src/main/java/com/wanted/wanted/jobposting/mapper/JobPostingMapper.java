@@ -80,8 +80,8 @@ public class JobPostingMapper {
         return detailResponse;
     }
 
-    public JobPostingDto.applyResponse applyForJobToApplyResponse(ApplyForJob applyForJob) {
-        JobPostingDto.applyResponse applyResponse = new JobPostingDto.applyResponse();
+    public JobPostingDto.ApplyResponse applyForJobToApplyResponse(ApplyForJob applyForJob) {
+        JobPostingDto.ApplyResponse applyResponse = new JobPostingDto.ApplyResponse();
         applyResponse.setPosting_id(applyForJob.getJobPosting().getPosting_id());
         applyResponse.setApplicant_id(applyForJob.getApplicant().getApplicant_id());
 
