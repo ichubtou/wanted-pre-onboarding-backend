@@ -236,4 +236,54 @@ public class JobPostingServiceTest {
         assertThat(jobPostingList.get(0).getReward()).isEqualTo(reward);
         assertThat(jobPostingList.get(0).getSkill()).isEqualTo(skill);
     }
+
+    @Test
+    @DisplayName("JobPosting 상세 조회")
+    public void testGetDetailJobPosting() {
+        // given
+        Long position_id = 1L;
+        String position = "백엔드 주니어 개발자";
+        Integer reward = 1000000;
+        String description = "원티드랩에서 백엔드 주니어 개발자를 채용합니다. 자격요건은..";
+        String skill = "Python";
+        Long company_id = 1L;
+        String company_name = "원티드랩";
+        String country = "한국";
+        String location = "서울";
+
+        JobPosting jobPosting1 = new JobPosting();
+        jobPosting1.setPosting_id(position_id);
+        jobPosting1.setPosition(position);
+        jobPosting1.setReward(reward);
+        jobPosting1.setDescription(description);
+        jobPosting1.setSkill(skill);
+
+        JobPosting jobPosting2 = new JobPosting();
+        jobPosting2.setPosting_id(2L);
+
+        Company company = new Company();
+        company.setCompany_id(company_id);
+        company.setCompany_name(company_name);
+        company.setCountry(country);
+        company.setLocation(location);
+        company.setJobPostingList(List.of(jobPosting2));
+
+        jobPosting1.setCompany(company);
+
+        Mockito.when(jobPostingRepository.findById(anyLong())).thenReturn(Optional.of(jobPosting1));
+
+        // when
+        JobPostingDto.DetailResponse detailJobPosting = jobPostingService.getDetailJobPosting(1L);
+
+        // then
+        assertThat(detailJobPosting.getPosting_id()).isEqualTo(position_id);
+        assertThat(detailJobPosting.getCompany_name()).isEqualTo(company_name);
+        assertThat(detailJobPosting.getCountry()).isEqualTo(country);
+        assertThat(detailJobPosting.getLocation()).isEqualTo(location);
+        assertThat(detailJobPosting.getPosition()).isEqualTo(position);
+        assertThat(detailJobPosting.getReward()).isEqualTo(reward);
+        assertThat(detailJobPosting.getSkill()).isEqualTo(skill);
+        assertThat(detailJobPosting.getDescription()).isEqualTo(description);
+        assertThat(detailJobPosting.getOtherJobPostingList()).isEqualTo(List.of(2L));
+    }
 }
