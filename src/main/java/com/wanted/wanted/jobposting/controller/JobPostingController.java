@@ -23,4 +23,10 @@ public class JobPostingController {
     public ResponseEntity<JobPostingDto.PostAndUpdateResponse> updateJobPosting(@PathVariable Long position_id, @RequestBody JobPostingDto.Update jobPostingUpdateDto) {
         return new ResponseEntity<>(jobPostingService.updateJobPosting(position_id, jobPostingUpdateDto), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{position_id}")
+    public ResponseEntity<Void> deleteJobPosting(@PathVariable Long position_id) {
+        jobPostingService.deleteJobPosting(position_id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -39,4 +39,8 @@ public class JobPostingService {
 
         return jobPostingUpdateResponse;
     }
+
+    public void deleteJobPosting(Long position_id) {
+        jobPostingRepository.deleteById(position_id);
+    }
 }
