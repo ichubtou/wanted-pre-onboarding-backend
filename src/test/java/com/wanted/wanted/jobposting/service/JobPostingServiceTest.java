@@ -132,4 +132,18 @@ public class JobPostingServiceTest {
         assertThat(result.getDescription()).isEqualTo(description);
         assertThat(result.getSkill()).isEqualTo(updateSkill);
     }
+
+    @Test
+    @DisplayName("JobPosting 삭제")
+    public void testDeleteJobPosting() {
+        Long position_id = 1L;
+
+        Mockito.doNothing().when(jobPostingRepository).deleteById(position_id);
+
+        // when
+        jobPostingService.deleteJobPosting(position_id);
+
+        // then
+        Mockito.verify(jobPostingRepository).deleteById(position_id);
+    }
 }
