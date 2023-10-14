@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,5 +43,13 @@ public class JobPostingService {
 
     public void deleteJobPosting(Long position_id) {
         jobPostingRepository.deleteById(position_id);
+    }
+
+    public List<JobPostingDto.GetResponse> getJobPostings() {
+        List<JobPosting> jobPostingList = jobPostingRepository.findAll();
+
+        List<JobPostingDto.GetResponse> getResponseList = jobPostingMapper.jobPostingGetListToJobPostingList(jobPostingList);
+
+        return getResponseList;
     }
 }

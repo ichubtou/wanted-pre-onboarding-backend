@@ -6,6 +6,9 @@ import com.wanted.wanted.jobposting.entity.JobPosting;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class JobPostingMapper {
@@ -35,5 +38,22 @@ public class JobPostingMapper {
         postResponse.setDescription(jobPosting.getDescription());
 
         return postResponse;
+    }
+
+    public List<JobPostingDto.GetResponse> jobPostingGetListToJobPostingList(List<JobPosting> jobPostingList) {
+        List<JobPostingDto.GetResponse> getResponseList = new ArrayList<>();
+        for (JobPosting jobPosting : jobPostingList) {
+            JobPostingDto.GetResponse getResponse = new JobPostingDto.GetResponse();
+            getResponse.setPosting_id(jobPosting.getPosting_id());
+            getResponse.setCompany_name(jobPosting.getCompany().getCompany_name());
+            getResponse.setCountry(jobPosting.getCompany().getCountry());
+            getResponse.setLocation(jobPosting.getCompany().getLocation());
+            getResponse.setPosition(jobPosting.getPosition());
+            getResponse.setReward(jobPosting.getReward());
+            getResponse.setSkill(jobPosting.getSkill());
+            getResponseList.add(getResponse);
+        }
+
+        return getResponseList;
     }
 }

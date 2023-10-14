@@ -30,7 +30,6 @@ public class JobPostingDto {
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
-    @Builder
     public static class PostAndUpdateResponse {
         private Long posting_id;
         private Long company_id;
@@ -40,6 +39,20 @@ public class JobPostingDto {
         private String position;
         private Integer reward;
         private String description;
+        private String skill;
+    }
+
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class GetResponse {
+        private Long posting_id;
+        private String company_name;
+        private String country;
+        private String location;
+        private String position;
+        private Integer reward;
         private String skill;
     }
 }
