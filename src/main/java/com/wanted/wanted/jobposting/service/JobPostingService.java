@@ -52,4 +52,8 @@ public class JobPostingService {
 
         return getResponseList;
     }
+
+    public List<JobPostingDto.GetResponse> getSearchJobPostings(String search) {
+        return jobPostingMapper.jobPostingGetListToJobPostingList(jobPostingRepository.searchJobPostings(search));
+    }
 }
