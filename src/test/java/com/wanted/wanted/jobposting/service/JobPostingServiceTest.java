@@ -92,7 +92,7 @@ public class JobPostingServiceTest {
         String country = "한국";
         String location = "서울";
 
-        Integer updateReward = 1000000;
+        Integer updateReward = 1500000;
         String updateSkill = "Django";
 
         JobPostingDto.Update jobPostingDto = new JobPostingDto.Update();
