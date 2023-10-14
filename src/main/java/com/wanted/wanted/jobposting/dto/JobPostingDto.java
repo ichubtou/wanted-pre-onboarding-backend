@@ -21,6 +21,7 @@ public class JobPostingDto {
     @NoArgsConstructor
     @Builder
     public static class PostResponse {
+        private Long posting_id;
         private Long company_id;
         private String company_name;
         private String country;

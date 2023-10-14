@@ -24,6 +24,7 @@ public class JobPostingMapper {
 
     public JobPostingDto.PostResponse jobPostingToJobPostingPostResponse(JobPosting jobPosting) {
         JobPostingDto.PostResponse postResponse = new JobPostingDto.PostResponse();
+        postResponse.setPosting_id(jobPosting.getPosting_id());
         postResponse.setCompany_id(jobPosting.getCompany().getCompany_id());
         postResponse.setCompany_name(jobPosting.getCompany().getCompany_name());
         postResponse.setCountry(jobPosting.getCompany().getCountry());

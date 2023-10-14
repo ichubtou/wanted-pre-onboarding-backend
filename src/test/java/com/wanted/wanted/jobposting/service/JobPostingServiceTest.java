@@ -64,6 +64,7 @@ public class JobPostingServiceTest {
         JobPostingDto.PostResponse result = jobPostingService.createJobPosting(jobPostingDto);
 
         // then
+        assertThat(result.getPosting_id()).isEqualTo(position_id);
         assertThat(result.getCompany_id()).isEqualTo(company_id);
         assertThat(result.getCompany_name()).isEqualTo(company_name);
         assertThat(result.getCountry()).isEqualTo(country);
